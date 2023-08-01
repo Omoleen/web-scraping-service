@@ -35,5 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
         attrs.pop('password1')
         return attrs
 
+    def create(self, validated_data):
+        return self.Meta.model.objects.create_user(**validated_data)
+
     def to_representation(self, instance):
         return instance.get_tokens()
